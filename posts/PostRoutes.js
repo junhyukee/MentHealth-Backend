@@ -40,8 +40,7 @@ router
 		const { id } = req.params;
 		try {
 			const count = await postModel.deletePost(id);
-			count
-			//fix this section
+			count > 0
 			? res.status(200).json({ message: 'Successfully deleted post' })
 			: next({ statusCode: 404 })
 		} catch(err) {
@@ -52,9 +51,8 @@ router
 		const { id } = req.params;
 		const post = req.body;
 		try {
-			const updatedUser = await postModel.updatePost(id, post)
-			updatedUser
-			//fix this section
+			const count = await postModel.updatePost(id, post)
+			count > 0
 			? res.status(200).json({ message: 'Updated!' })
 			: next({ statusCode: 404 })
 		} catch(err) {

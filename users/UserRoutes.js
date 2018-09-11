@@ -40,7 +40,7 @@ router
 		const { username } = req.params;
 		try {
 			const count = await userModel.deleteUser(username);
-			count
+			count > 0
 			? res.status(200).json({ message: 'Successfully deleted user' })
 			: next({ statusCode: 404 })
 		} catch(err) {

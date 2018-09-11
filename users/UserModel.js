@@ -16,9 +16,6 @@ async function getUsers(){
 	}
 }
 
-
-// getUsers();
-
 async function getUser(username){
 	try {
 		const snapshot = await userRef.doc(username).get();
@@ -28,8 +25,6 @@ async function getUser(username){
 		return err;
 	}
 }
-
-// getUser('jhk');
 
 async function addUser(user){
 	const { username, name, age } = user;
@@ -47,13 +42,6 @@ async function addUser(user){
 	}
 }
 
-// test = {
-// 	username: 'jhk',
-// 	name: 'Jun',
-// 	age: 21,
-// }
-// addUser(test);
-
 async function updateUser(username, user){
 	const { name, age } = user;
 	try {
@@ -70,15 +58,17 @@ async function updateUser(username, user){
 async function deleteUser(username){
 	try {
 		const snapshot = await userRef.where('username', '==', username.toString()).get();
-		snapshot.forEach((doc) => {
-			doc.ref.delete().then(() => {
-				console.log('deleted')
-			}).catch(err => {
-				console.log(err);
-			})
+		let count = 0;
+		const deleter = await snapshot.forEach(async (doc) => {
+			try {
+				doc.ref.delete()
+				count ++
+			} catch(err) {
+				console.log(err)
+			}
 		})
 		//adjust this so that a 404 can come out, currently always returns true
-		return true;
+		return count;
 	} catch(err) {
 		return err;
 	}

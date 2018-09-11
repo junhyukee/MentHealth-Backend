@@ -61,10 +61,16 @@ async function updatePost(id, post){
 	const { title, content } = post;
 	try {
 		const snapshot = await textPostRef.where('id', '==', Number(id)).get();
-		snapshot.forEach((doc) => {
-			textPostRef.doc(doc.id).update({title, content});
+		let count = 0;
+		const updater = await snapshot.forEach(async (doc) => {
+			try {
+				textPostRef.doc(doc.id).update({title, content})
+				count++;
+			} catch(err) {
+				console.log(err)
+			}
 		})
-		return true;
+		return count;
 	} catch(err){
 		return err;
 	}
@@ -73,15 +79,16 @@ async function updatePost(id, post){
 async function deletePost(id){
 	try {
 		const snapshot = await textPostRef.where('id', '==', Number(id)).get();
-		snapshot.forEach((doc) => {
-			doc.ref.delete().then(() => {
-				console.log('deleted')
-			}).catch(err => {
-				console.log(err);
-			})
+		let count = 0;
+		const deleter = await snapshot.forEach(async (doc) => {
+			try {
+				doc.ref.delete()
+				count ++
+			} catch(err) {
+				console.log(err)
+			}
 		})
-		//adjust this so that a 404 can come out, currently always returns true
-		return true;
+		return count;
 	} catch(err) {
 		return err;
 	}
