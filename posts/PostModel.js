@@ -8,11 +8,11 @@ async function getTextPosts(){
 		const snapshot = await textPostRef.get()
 		const posts = [];
 		snapshot.forEach((doc) => {
-			posts.push(doc.data().post);
+			posts.push(doc.data());
 		})
-		console.log(posts)
+		return posts;
 	} catch(err){
-		console.log(err);
+		return err;
 	}
 }
 
@@ -20,14 +20,14 @@ async function getTextPosts(){
 
 async function getTextPost(id){
 	try {
-		const snapshot = await textPostRef.where('id', '==', id).get()
+		const snapshot = await textPostRef.where('id', '==', Number(id)).get()
 		const post = [];
 		snapshot.forEach(doc => {
-			post.push(doc.data().post);
+			post.push(doc.data());
 		})
-		console.log(post[0]);
+		return post[0]
 	} catch(err){
-		console.log(err);
+		return err;
 	}
 }
 
@@ -43,9 +43,9 @@ async function addTextPost(post){
 			title,
 			timestamp
 		})
-		console.log(newTextPost);
+		return newTextPost;
 	} catch(err) {
-		console.log(err)
+		return err;
 	}
 }
 

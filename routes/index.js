@@ -5,7 +5,7 @@ const PostRoutes = require('../posts/PostRoutes.js');
 
 const router = express.Router();
 
-router.use('/users', userRoutes);
-router.use('/posts', postRoutes);
+router.use('/users', UserRoutes);
+router.use('/posts', PostRoutes);
 
 module.exports = router;

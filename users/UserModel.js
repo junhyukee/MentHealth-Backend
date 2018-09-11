@@ -8,23 +8,24 @@ async function getUsers(){
 		const snapshot = await userRef.get()
 		const users = [];
 		snapshot.forEach((doc) => {
-			users.push(doc.data().user);
+			users.push(doc.data());
 		})
-		console.log(users)
+		return users;
 	} catch(err){
-		console.log(err);
+		return err;
 	}
 }
+
 
 // getUsers();
 
 async function getUser(username){
 	try {
 		const snapshot = await userRef.doc(username).get();
-		const user = snapshot.data().user;
-		console.log(user);
+		const user = snapshot.data();
+		return user;
 	} catch(err) {
-		console.log(err);
+		return err;
 	}
 }
 
@@ -40,9 +41,9 @@ async function addUser(user){
 			age,
 			timestamp
 		})
-		console.log(newUser);
+		return newUser;
 	} catch(err) {
-		console.log(err)
+		return err;
 	}
 }
 

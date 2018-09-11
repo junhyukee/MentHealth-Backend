@@ -9,7 +9,7 @@ async function getUsers(){
 		const snapshot = await userRef.get()
 		const users = [];
 		snapshot.forEach((doc) => {
-			users.push(doc.data().user);
+			users.push(doc.data());
 		})
 		console.log(users)
 	} catch(err){
@@ -22,7 +22,7 @@ async function getUsers(){
 async function getUser(username){
 	try {
 		const snapshot = await userRef.doc(username).get();
-		const user = snapshot.data().user;
+		const user = snapshot.data();
 		console.log(user);
 	} catch(err) {
 		console.log(err);
@@ -59,7 +59,7 @@ async function getTextPosts(){
 		const snapshot = await textPostRef.get()
 		const posts = [];
 		snapshot.forEach((doc) => {
-			posts.push(doc.data().post);
+			posts.push(doc.data());
 		})
 		console.log(posts)
 	} catch(err){
@@ -74,7 +74,7 @@ async function getTextPost(id){
 		const snapshot = await textPostRef.where('id', '==', id).get()
 		const post = [];
 		snapshot.forEach(doc => {
-			post.push(doc.data().post);
+			post.push(doc.data());
 		})
 		console.log(post[0]);
 	} catch(err){
