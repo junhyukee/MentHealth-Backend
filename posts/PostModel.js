@@ -57,8 +57,40 @@ async function addTextPost(post){
 
 // addTextPost(test);
 
+async function updatePost(id, post){
+	const { title, content } = post;
+	try {
+		const snapshot = await textPostRef.where('id', '==', Number(id)).get();
+		snapshot.forEach((doc) => {
+			textPostRef.doc(doc.id).update({title, content});
+		})
+		return true;
+	} catch(err){
+		return err;
+	}
+}
+
+async function deletePost(id){
+	try {
+		const snapshot = await textPostRef.where('id', '==', Number(id)).get();
+		snapshot.forEach((doc) => {
+			doc.ref.delete().then(() => {
+				console.log('deleted')
+			}).catch(err => {
+				console.log(err);
+			})
+		})
+		//adjust this so that a 404 can come out, currently always returns true
+		return true;
+	} catch(err) {
+		return err;
+	}
+}
+
 module.exports = {
 	getTextPosts,
 	getTextPost,
 	addTextPost,
+	updatePost,
+	deletePost,
 }
