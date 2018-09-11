@@ -17,7 +17,7 @@ router
 		const post = req.body;
 		try {
 			const add = await postModel.addTextPost(post);
-			res.status(201).json({ message: 'User succesfully registered.' });
+			res.status(201).json({ message: 'Post succesfully added.' });
 		} catch(err) {
 			next(err);
 		}
@@ -36,5 +36,11 @@ router
 			next(err);
 		}
 	})
+	// .delete(async (req, res, next) => {
+	// 	const { id } = req.params;
+	// 	try {
+			
+	// 	}
+	// })
 
 module.exports = router

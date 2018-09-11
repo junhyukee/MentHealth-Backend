@@ -36,5 +36,28 @@ router
 			next(err);
 		}
 	})
+	.delete(async (req, res, next) => {
+		const { username } = req.params;
+		try {
+			const count = await userModel.deleteUser(username);
+			count
+			? res.status(200).json({ message: 'Successfully deleted user' })
+			: next({ statusCode: 404 })
+		} catch(err) {
+			next(err);
+		}
+	})
+	.put(async (req, res, next) => {
+		const { username } = req.params;
+		const user = req.body;
+		try {
+			const updatedUser = await userModel.updateUser(username, user)
+			updatedUser.error
+			? next({ statusCode: 404 })
+			: res.status(200).json({ message: 'Updated!' })
+		} catch(err) {
+			next(err)
+		}
+	})
 
 module.exports = router
