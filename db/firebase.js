@@ -8,9 +8,9 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-const settings= {
-	timestampsInSnapshots: true
-}
+const settings = {
+  timestampsInSnapshots: true
+};
 
 db.settings(settings);
 
