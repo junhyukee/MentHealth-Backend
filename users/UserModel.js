@@ -67,7 +67,6 @@ async function deleteUser(username){
 				console.log(err)
 			}
 		})
-		//adjust this so that a 404 can come out, currently always returns true
 		return count;
 	} catch(err) {
 		return err;

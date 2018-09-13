@@ -16,8 +16,6 @@ async function getTextPosts(){
 	}
 }
 
-// getTextPosts();
-
 async function getTextPost(id){
 	try {
 		const snapshot = await textPostRef.where('id', '==', Number(id)).get()
@@ -30,8 +28,6 @@ async function getTextPost(id){
 		return err;
 	}
 }
-
-// getTextPost(2);
 
 async function addTextPost(post){
 	const { id, content, title } = post;
@@ -48,14 +44,6 @@ async function addTextPost(post){
 		return err;
 	}
 }
-
-// test = {
-// 	id: 2,
-// 	title: 'How I got rid of my chocolate allergy',
-// 	content: `I just kept eating chocolate.`
-// }
-
-// addTextPost(test);
 
 async function updatePost(id, post){
 	const { title, content } = post;
